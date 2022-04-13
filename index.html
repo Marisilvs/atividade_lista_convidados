@@ -5,6 +5,9 @@
         <title>Lista de Convidados</title>
     </head>
     <body>
+        
+   
+
         <div id="App">
 
             <h1>Lista de convidados</h1>
@@ -38,7 +41,7 @@
             //manipulação dos elementos
             function listarConvidados(){
                 elLista.innerHTML = "";
-                for(convidado of convidados){
+                for(const convidado of convidados){
                     
                     //criação dos elementos
                     var elConvidado = document.createElement("li");
@@ -46,10 +49,25 @@
                     var elinput = document.createTextNode(', ' + convidado.idade + ' ' + 'anos');
                     var elid = document.createTextNode(convidado.id + '' + ' -  ');
                     
+                    var elExcluir = document.createElement("img");
+                    elExcluir.setAttribute("id", "trash");
+                    elExcluir.setAttribute("width", "20px");
+                    elExcluir.setAttribute("src", "./https://t3.ftcdn.net/jpg/04/92/30/88/240_F_492308833_xXc7hxGdBrk3OQtb9NKCKq0s1hZ40PC6.jpg");
+                    elExcluir.onclick = function(){
+                        convidados = convidados.filter(function(item){
+                            return item.nome !== convidado.nome;
+                        });
+
+                        listarConvidados();
+                    };
+
+                    var elExcluirTexto = document.createTextNode(" " +  "delete");
         
+                    elExcluir. appendChild(elExcluirTexto);
                     elConvidado.appendChild(elid);
                     elConvidado.appendChild(elNome);
                     elConvidado.appendChild(elinput);
+                    elConvidado.appendChild(elExcluir);
                     elLista.appendChild(elConvidado);
                 }
             }
@@ -69,6 +87,8 @@
             }
 
             elBotao.onclick = adicionarConvidado;
+        
+          
         </script>
     </body>
 </html>
